@@ -11046,6 +11046,7 @@ var WeatherPage = function (_Reflux$Component) {
 		key: "render",
 		value: function render() {
 			console.log("render weather");
+			console.log("NEW WEATHER");
 
 			var output = this.pleaseWait();
 
