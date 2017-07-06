@@ -10805,7 +10805,8 @@ module.exports = NotesPage;
 "use strict";
 
 
-var baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
+//let baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
+var myUrl = "https://api.apixu.com/v1/forecast.json?key=321fdbb671bc4d30bcd132730171006&q=Paris";
 
 var service = {
 			myGet: function myGet(url) {
@@ -10824,7 +10825,8 @@ var service = {
 												console.log("Some error");
 									};
 
-									req.open("GET", baseUrl + url, true);
+									// req.open("GET", baseUrl + url, true);
+									req.open("GET", myUrl, true);
 
 									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
 									//req.setRequestHeader("Content-Type", "application/json");
@@ -10870,6 +10872,7 @@ var WeatherPage = function (_Reflux$Component) {
 
 		_this.state = {};
 		_this.createMarkup = _this.createMarkup.bind(_this);
+		_this.create = _this.create.bind(_this);
 		_this.store = MyStore;
 		return _this;
 	}
@@ -11029,6 +11032,16 @@ var WeatherPage = function (_Reflux$Component) {
 			);
 		}
 	}, {
+		key: "create",
+		value: function create(weather) {
+			console.log("my city: " + weather.location.name);
+			return React.createElement(
+				"div",
+				null,
+				weather.location.name
+			);
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			console.log("render weather");
@@ -11036,7 +11049,8 @@ var WeatherPage = function (_Reflux$Component) {
 			var output = this.pleaseWait();
 
 			if (this.state.weatherData) {
-				output = this.createMarkup(this.state.weatherData);
+				//output = this.createMarkup(this.state.weatherData);
+				output = this.create(this.state.weatherData);
 			}
 
 			return React.createElement(
