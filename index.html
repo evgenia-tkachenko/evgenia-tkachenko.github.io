@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Forecast</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,800" rel="stylesheet">
+
+	<style type="text/css">
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+		#reactcontainer {
+			background: whitesmoke;
+			width: 100%;
+			height: 100vh;
+			font-family: 'Raleway', sans-serif;
+		}
+		nav {
+			width: 100%;
+			height: 20vh;
+		}
+		.linkToWeather {
+			width: 50%;
+			height: 20vh;
+			margin: 0 auto;
+			background: url("output/pics/weather.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.linkToNotes {
+			width: 45%;
+			height: 20vh;
+			margin: 0 auto;
+			background: url("output/pics/notes.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.menu {
+			float: left;
+			box-sizing: border-box;
+			width: 50%;
+			font-size: 4em;
+			background: powderblue;
+			text-align: center;
+			line-height: 20vh;
+			border: 1px solid grey;
+		}
+		.menu:hover {
+			background: lightblue;
+		}
+		.widget {
+			width: 100%;
+		}
+		.wait {
+			margin-top: 30vh;
+			width: 100%;
+			font-size: 5em;
+			text-align: center;
+		}
+		.city {
+			width: 100%;
+			height: 20vh;
+			font-size: 5em;
+			line-height: 20vh;
+			text-indent: 20%;
+			background: whitesmoke;
+		}
+		.cityName {
+			position: absolute;
+		}
+		.mainIcon {
+			width: 10vh;
+			height: 10vh;
+			position: absolute;
+			right: 7vh;
+			top: 25vh;
+		}
+		.temp {
+			width: 100%;
+			height: 20vh;
+			font-size: 11em;
+			font-weight: 800;
+			text-align: center;
+			line-height: 20vh;
+			background: mediumslateblue;
+			color: white;
+		}
+		.details {
+			height: 20vh;
+			background: whitesmoke;
+			font-size: 5vw;
+			font-weight: 400;
+			padding: 0 5%;
+		}
+		.params {
+			float: left;
+			width: 50%;
+			height: 100%;
+			margin: 2.5% 0 -2.5% 0;
+			text-align: right;
+		}
+		.values {
+			float: left;
+			width: 40%;
+			height: 100%;
+			margin: 2.5% 0 -2.5% 4%;
+			text-align: left;
+		}
+		.forecast {
+			height: 20vh;
+			background: powderblue;
+		}
+		.cell {
+			float: left;
+			width: 33.333333%;
+			height: 100%;
+			box-sizing: border-box;
+			border: 1px solid grey;
+			font-size: 5em;
+			text-align: center;
+		}
+		.foreDate {
+			font-size: 0.7em;
+			color: mediumslateblue;
+		}
+		.foreIcon {
+			width: 7vh;
+			height: 7vh;
+			margin: 8% auto;
+		}
+		.foreTemp {
+
+		}
+		.notesContainer {
+			background: mediumslateblue;
+			width: 100%;
+			height: 65vh;
+			padding-top: 5%;
+			padding-bottom: 5%;
+			overflow: auto;
+		}
+		.item {
+			width: 90%;
+			padding: 2%;
+			font-size: 3em;
+			background: whitesmoke;
+			margin: 0 auto 3% auto;
+			border-radius: 0.3em;
+		}
+		.bin {
+			background: url("http://www.freeiconspng.com/uploads/recycle-bin-icon-25.png");
+			background-size: cover;
+			width: 10%;
+			height: 100%;
+		}
+		.newNote {
+			background: powderblue;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			height: 10vh;
+		}
+		.newItem {
+			width: 35%;
+			height: 6vh;
+			float: right;
+			font-size: 3em;
+			margin: 3%;
+			background: mediumslateblue;
+			color: white;
+			border: none;
+			border-radius: 0.3em;
+		}
+		.inputBlock {
+			margin: 3%;
+		}
+		.input {
+			width: 70%;
+			height: 6vh;
+			font-size: 3em;
+			border: none;
+			border-radius: 0.3em;
+		}
+		#add {
+			width: 25%;
+			height: 6vh;
+			float: right;
+			font-size: 3em;
+			background: mediumslateblue;
+			color: white;
+			border: none;
+			border-radius: 0.3em;
+		}
+		#add:disabled {
+			opacity: 0.5;
+		}
+		.hide {
+			display: none;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="reactcontainer">
+	</div>
+
+	<script src="output/bundle.js"></script>
+
+</body>
+</html>
