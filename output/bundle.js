@@ -10826,6 +10826,7 @@ var service = {
 									};
 
 									// req.open("GET", baseUrl + url, true);
+									console.log("NEW");
 									req.open("GET", myUrl, true);
 
 									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
