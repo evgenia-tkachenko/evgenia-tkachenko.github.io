@@ -10805,30 +10805,37 @@ module.exports = NotesPage;
 "use strict";
 
 
-var baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
-var localhost = "http://localhost:6060/";
+var baseUrl = "//api.openweathermap.org/data/2.5/forecast";
 
 var service = {
-	myGet: function myGet(url) {
-		console.log("service.myGet");
-		return new Promise(function (resolve, reject) {
-			var req = new XMLHttpRequest();
+			myGet: function myGet(url) {
+						console.log("service.myGet");
+						return new Promise(function (resolve, reject) {
+									var req = new XMLHttpRequest();
 
-			req.onload = function () {
-				var response = JSON.parse(req.response);
-				resolve(response);
-				console.log(response);
-			};
+									req.onload = function () {
+												var response = JSON.parse(req.response);
+												resolve(response);
+												console.log(response);
+									};
 
-			req.onerror = function () {
-				reject("Some error");
-				console.log("Some error");
-			};
+									req.onerror = function () {
+												reject("Some error");
+												console.log("Some error");
+									};
 
-			req.open("GET", baseUrl + url, true);
-			req.send();
-		});
-	}
+									req.open("GET", baseUrl + url, true);
+
+									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
+									//req.setRequestHeader("Content-Type", "application/json");
+
+									//req.setRequestHeader('Access-Control-Allow-Headers', '*');
+									//req.setRequestHeader('Content-type', 'text/plain');
+									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
+
+									req.send();
+						});
+			}
 };
 
 module.exports = service;
