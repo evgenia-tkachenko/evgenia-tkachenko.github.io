@@ -10805,7 +10805,7 @@ module.exports = NotesPage;
 "use strict";
 
 
-var baseUrl = "//api.openweathermap.org/data/2.5/forecast";
+var baseUrl = "api.openweathermap.org/data/2.5/forecast";
 
 var service = {
 			myGet: function myGet(url) {
