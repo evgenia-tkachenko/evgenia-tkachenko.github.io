@@ -5041,7 +5041,7 @@ var MyStore = function (_Reflux$Store) {
 			var _this2 = this;
 
 			console.log("onDataLoad");
-			service.myGet("?id=625144&APPID=7325e8e188135ba7e8be580608b50b89").then(function (response) {
+			service.myGet("https://api.apixu.com/v1/forecast.json?key=321fdbb671bc4d30bcd132730171006&q=Minsk&days=3").then(function (response) {
 				_this2.setState({ weatherData: response });
 			});
 		}
@@ -10620,9 +10620,9 @@ var App = function (_Reflux$Component) {
 				),
 				React.createElement(
 					"div",
-					{ className: "hide", ref: function ref(notes) {
+					{ ref: function ref(notes) {
 							_this2.notes = notes;
-						} },
+						}, className: "hide" },
 					React.createElement(NotesPage, null)
 				)
 			);
@@ -10805,40 +10805,27 @@ module.exports = NotesPage;
 "use strict";
 
 
-//let baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
-var myUrl = "https://api.apixu.com/v1/forecast.json?key=321fdbb671bc4d30bcd132730171006&q=Paris";
-
 var service = {
-			myGet: function myGet(url) {
-						console.log("service.myGet");
-						return new Promise(function (resolve, reject) {
-									var req = new XMLHttpRequest();
+	myGet: function myGet(url) {
+		console.log("service.myGet");
+		return new Promise(function (resolve, reject) {
+			var req = new XMLHttpRequest();
 
-									req.onload = function () {
-												var response = JSON.parse(req.response);
-												resolve(response);
-												console.log(response);
-									};
+			req.onload = function () {
+				var response = JSON.parse(req.response);
+				resolve(response);
+				console.log(response);
+			};
 
-									req.onerror = function () {
-												reject("Some error");
-												console.log("Some error");
-									};
+			req.onerror = function () {
+				reject("Some error");
+				console.log("Some error");
+			};
 
-									// req.open("GET", baseUrl + url, true);
-									console.log("NEW");
-									req.open("GET", myUrl, true);
-
-									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
-									//req.setRequestHeader("Content-Type", "application/json");
-
-									//req.setRequestHeader('Access-Control-Allow-Headers', '*');
-									//req.setRequestHeader('Content-type', 'text/plain');
-									//req.setRequestHeader('Access-Control-Allow-Origin', '*');
-
-									req.send();
-						});
-			}
+			req.open("GET", url, true);
+			req.send();
+		});
+	}
 };
 
 module.exports = service;
@@ -10888,13 +10875,8 @@ var WeatherPage = function (_Reflux$Component) {
 		key: "createMarkup",
 		value: function createMarkup(weather) {
 			console.log("createMarkup(weather)");
-			console.log(weather.city.name);
-
-			var hour = parseInt(weather.list[0].dt_txt[11] + weather.list[0].dt_txt[12]);
-
-			var diff = 15 - hour;
-			var n = diff / 3;
-			if (n <= 0) n += 8;
+			console.log(weather.current.condition.icon.slice(30));
+			var a = "04d";
 
 			return React.createElement(
 				"div",
@@ -10905,16 +10887,14 @@ var WeatherPage = function (_Reflux$Component) {
 					React.createElement(
 						"div",
 						{ className: "cityName" },
-						weather.city.name,
-						", ",
-						weather.city.country
+						weather.location.name
 					),
-					React.createElement("div", { className: "mainIcon", style: { background: "url(output/pics/" + weather.list[0].weather[0].icon + ".svg)", backgroundSize: "contain" } })
+					React.createElement("div", { className: "mainIcon", style: { background: "url(output/pics/" + weather.current.condition.icon.slice(30), backgroundSize: "contain" } })
 				),
 				React.createElement(
 					"div",
 					{ className: "temp" },
-					Math.floor(weather.list[0].main.temp - 273.15),
+					weather.current.temp_c,
 					String.fromCharCode(176),
 					"C"
 				),
@@ -10924,7 +10904,7 @@ var WeatherPage = function (_Reflux$Component) {
 					React.createElement(
 						"div",
 						{ className: "params" },
-						"Pressure:",
+						"Feels like:",
 						React.createElement("br", null),
 						"Wind:",
 						React.createElement("br", null),
@@ -10935,16 +10915,17 @@ var WeatherPage = function (_Reflux$Component) {
 					React.createElement(
 						"div",
 						{ className: "values" },
-						weather.list[0].main.pressure,
-						" hPa",
+						weather.current.feelslike_c,
+						String.fromCharCode(176),
+						"C",
 						React.createElement("br", null),
-						weather.list[0].wind.speed,
-						" m/s",
+						weather.current.wind_kph,
+						" kph",
 						React.createElement("br", null),
-						weather.list[0].main.humidity,
+						weather.current.humidity,
 						"%",
 						React.createElement("br", null),
-						weather.list[0].clouds.all,
+						weather.current.cloud,
 						"%"
 					)
 				),
@@ -10957,20 +10938,17 @@ var WeatherPage = function (_Reflux$Component) {
 						React.createElement(
 							"div",
 							{ className: "foreDate" },
-							weather.list[n].dt_txt[11],
-							weather.list[n].dt_txt[12],
+							weather.forecast.forecastday[0].date[8],
+							weather.forecast.forecastday[0].date[9],
 							".",
-							weather.list[n].dt_txt[8],
-							weather.list[n].dt_txt[9],
-							".",
-							weather.list[n].dt_txt[5],
-							weather.list[n].dt_txt[6]
+							weather.forecast.forecastday[0].date[5],
+							weather.forecast.forecastday[0].date[6]
 						),
-						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.list[n].weather[0].icon + ".svg)", backgroundSize: "contain" } }),
+						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.forecast.forecastday[0].day.condition.icon.slice(30), backgroundSize: "contain" } }),
 						React.createElement(
 							"div",
 							{ className: "foreTemp" },
-							Math.floor(weather.list[0].main.temp - 273.15),
+							Math.floor(weather.forecast.forecastday[0].day.maxtemp_c),
 							String.fromCharCode(176),
 							"C"
 						)
@@ -10981,17 +10959,17 @@ var WeatherPage = function (_Reflux$Component) {
 						React.createElement(
 							"div",
 							{ className: "foreDate" },
-							weather.list[n + 8].dt_txt[8],
-							weather.list[n + 8].dt_txt[9],
+							weather.forecast.forecastday[1].date[8],
+							weather.forecast.forecastday[1].date[9],
 							".",
-							weather.list[n + 8].dt_txt[5],
-							weather.list[n + 8].dt_txt[6]
+							weather.forecast.forecastday[1].date[5],
+							weather.forecast.forecastday[1].date[6]
 						),
-						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.list[n + 8].weather[0].icon + ".svg)", backgroundSize: "contain" } }),
+						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.forecast.forecastday[1].day.condition.icon.slice(30), backgroundSize: "contain" } }),
 						React.createElement(
 							"div",
 							{ className: "foreTemp" },
-							Math.floor(weather.list[8].main.temp - 273.15),
+							Math.floor(weather.forecast.forecastday[1].day.maxtemp_c),
 							String.fromCharCode(176),
 							"C"
 						)
@@ -11002,17 +10980,17 @@ var WeatherPage = function (_Reflux$Component) {
 						React.createElement(
 							"div",
 							{ className: "foreDate" },
-							weather.list[n + 16].dt_txt[8],
-							weather.list[n + 16].dt_txt[9],
+							weather.forecast.forecastday[2].date[8],
+							weather.forecast.forecastday[2].date[9],
 							".",
-							weather.list[n + 16].dt_txt[5],
-							weather.list[n + 16].dt_txt[6]
+							weather.forecast.forecastday[2].date[5],
+							weather.forecast.forecastday[2].date[6]
 						),
-						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.list[n + 16].weather[0].icon + ".svg)", backgroundSize: "contain" } }),
+						React.createElement("div", { className: "foreIcon", style: { background: "url(output/pics/" + weather.forecast.forecastday[2].day.condition.icon.slice(30), backgroundSize: "contain" } }),
 						React.createElement(
 							"div",
 							{ className: "foreTemp" },
-							Math.floor(weather.list[16].main.temp - 273.15),
+							Math.floor(weather.forecast.forecastday[2].day.maxtemp_c),
 							String.fromCharCode(176),
 							"C"
 						)
@@ -11051,8 +11029,8 @@ var WeatherPage = function (_Reflux$Component) {
 			var output = this.pleaseWait();
 
 			if (this.state.weatherData) {
-				//output = this.createMarkup(this.state.weatherData);
-				output = this.create(this.state.weatherData);
+				output = this.createMarkup(this.state.weatherData);
+				//output = this.create(this.state.weatherData);
 			}
 
 			return React.createElement(
