@@ -9,20 +9,21 @@
 		body, html {
 			margin: 0;
 			padding: 0;
+			background: whitesmoke;
 		}
 		#reactcontainer {
 			background: whitesmoke;
-			width: 100%;
-			height: 100vh;
+			width: 980px;
+			margin: 0 auto;
 			font-family: 'Raleway', sans-serif;
 		}
 		nav {
 			width: 100%;
-			height: 20vh;
+			height: 350px;
 		}
 		.linkToWeather {
 			width: 50%;
-			height: 20vh;
+			height: 350px;
 			margin: 0 auto;
 			background: url("output/pics/weather.png");
 			background-size: contain;
@@ -30,8 +31,8 @@
 			background-position: center;
 		}
 		.linkToNotes {
-			width: 45%;
-			height: 20vh;
+			width: 50%;
+			height: 350px;
 			margin: 0 auto;
 			background: url("output/pics/notes.png");
 			background-size: contain;
@@ -40,13 +41,12 @@
 		}
 		.menu {
 			float: left;
-			box-sizing: border-box;
 			width: 50%;
-			font-size: 4em;
+			box-sizing: border-box;
 			background: powderblue;
-			text-align: center;
-			line-height: 20vh;
-			border: 1px solid grey;
+		}
+		.menu:first-child {
+			border-right: 1px solid grey;
 		}
 		.menu:hover {
 			background: lightblue;
@@ -55,144 +55,157 @@
 			width: 100%;
 		}
 		.wait {
-			margin-top: 30vh;
+			margin: 500px auto;
 			width: 100%;
-			font-size: 5em;
+			font-size: 70px;
 			text-align: center;
 		}
 		.city {
-			width: 100%;
-			height: 20vh;
-			font-size: 5em;
-			line-height: 20vh;
-			text-indent: 20%;
+			padding: 130px 100px 220px 160px;
+			font-size: 70px;
 			background: whitesmoke;
 		}
 		.cityName {
-			position: absolute;
+			position: relative;
+			float: left;
 		}
 		.mainIcon {
-			width: 10vh;
-			height: 10vh;
-			position: absolute;
-			right: 7vh;
-			top: 25vh;
+			width: 200px;
+			height: 170px;
+			float: left;
+			margin: -140px 0 0 550px;
 		}
 		.temp {
-			width: 100%;
-			height: 20vh;
-			font-size: 11em;
+			padding: 63.5px 0;
+			font-size: 190px;
 			font-weight: 800;
 			text-align: center;
-			line-height: 20vh;
 			background: mediumslateblue;
 			color: white;
 		}
 		.details {
-			height: 20vh;
-			background: whitesmoke;
-			font-size: 5vw;
+			font-size: 50px;
 			font-weight: 400;
-			padding: 0 5%;
+			height: 350px;
 		}
 		.params {
+			background: whitesmoke;
 			float: left;
 			width: 50%;
-			height: 100%;
-			margin: 2.5% 0 -2.5% 0;
+			padding: 57px 20px 57px 0;
 			text-align: right;
 		}
 		.values {
+			background: whitesmoke;
 			float: left;
-			width: 40%;
-			height: 100%;
-			margin: 2.5% 0 -2.5% 4%;
+			width: 45%;
+			padding: 57px 0 57px 20px;
 			text-align: left;
 		}
 		.forecast {
-			height: 20vh;
+			height: 300px;
 			background: powderblue;
 		}
 		.cell {
 			float: left;
 			width: 33.333333%;
-			height: 100%;
 			box-sizing: border-box;
 			border: 1px solid grey;
-			font-size: 5em;
+			font-size: 60px;
 			text-align: center;
+			padding: 20px 0;
+			background: powderblue;
 		}
 		.foreDate {
-			font-size: 0.7em;
 			color: mediumslateblue;
 		}
 		.foreIcon {
-			width: 7vh;
-			height: 7vh;
-			margin: 8% auto;
+			width: 130px;
+			height: 150px;
+			margin: 0 auto;
 		}
 		.foreTemp {
-
+			font-size: 70px;
 		}
 		.notesContainer {
 			background: mediumslateblue;
 			width: 100%;
-			height: 65vh;
-			padding-top: 5%;
-			padding-bottom: 5%;
+			height: 1150px;
+			padding-top: 40px;
+			padding-bottom: 40px;
 			overflow: auto;
+		}
+		.notesContainer::-webkit-scrollbar {
+		    width: 20px;
+		} 
+		.notesContainer::-webkit-scrollbar-thumb {
+		  background-color: indigo;
+		  border-radius: 15px;
 		}
 		.item {
 			width: 90%;
-			padding: 2%;
-			font-size: 3em;
+			padding: 10px;
+			font-size: 70px;
 			background: whitesmoke;
-			margin: 0 auto 3% auto;
-			border-radius: 0.3em;
+			margin: 0 auto 20px auto;
+			border-radius: 10px;
+			overflow-x: hidden;
 		}
 		.bin {
 			background: url("http://www.freeiconspng.com/uploads/recycle-bin-icon-25.png");
 			background-size: cover;
 			width: 10%;
-			height: 100%;
+			height: 100px;
+			position: relative;
+			float: right;
+			z-index: 100;
+			opacity: 0;
+		}
+		.item:hover .bin {
+			opacity: 0.6;
+		}
+		.item:hover .bin:hover {
+			opacity: 0.8;
 		}
 		.newNote {
 			background: powderblue;
-			position: fixed;
+			position: relative;
 			bottom: 0;
 			width: 100%;
-			height: 10vh;
+			height: 200px;
 		}
 		.newItem {
 			width: 35%;
-			height: 6vh;
 			float: right;
-			font-size: 3em;
-			margin: 3%;
+			font-size: 53px;
+			margin: 45px 20px;
+			padding: 20px;
 			background: mediumslateblue;
 			color: white;
 			border: none;
-			border-radius: 0.3em;
+			border-radius: 25px;
 		}
 		.inputBlock {
-			margin: 3%;
+			margin: 0 20px;
 		}
 		.input {
 			width: 70%;
-			height: 6vh;
-			font-size: 3em;
+			padding: 20px;
+			margin: 45px 0px;
+			font-size: 53px;
 			border: none;
-			border-radius: 0.3em;
+			border-radius: 25px;
 		}
 		#add {
-			width: 25%;
-			height: 6vh;
+			width: 20%;
 			float: right;
-			font-size: 3em;
+			font-size: 53px;
+			margin: 45px 20px;
+			padding: 20px;
 			background: mediumslateblue;
 			color: white;
 			border: none;
-			border-radius: 0.3em;
+			border-radius: 25px;
 		}
 		#add:disabled {
 			opacity: 0.5;

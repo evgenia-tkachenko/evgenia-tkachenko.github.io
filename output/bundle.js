@@ -5056,6 +5056,9 @@ var MyStore = function (_Reflux$Store) {
 			var tempArr = this.state.notesData;
 			tempArr.splice(index, 1);
 			this.setState({ notesData: tempArr });
+
+			var finalArr = JSON.stringify(tempArr);
+			localStorage.myNotes = finalArr;
 		}
 	}, {
 		key: "onSaveInput",
@@ -10713,6 +10716,11 @@ var NotesPage = function (_Reflux$Component) {
 			this.newBtn.classList.remove("hide");
 		}
 	}, {
+		key: "deleteNote",
+		value: function deleteNote(index) {
+			Actions.deleteItem(index);
+		}
+	}, {
 		key: "getInput",
 		value: function getInput(e) {
 			Actions.getInput(e);
@@ -10726,13 +10734,17 @@ var NotesPage = function (_Reflux$Component) {
 	}, {
 		key: "createMarkup",
 		value: function createMarkup() {
+			var _this2 = this;
+
 			var arr = this.state.notesData;
 			var notes = arr.map(function (item, index) {
 				return React.createElement(
 					"div",
 					{ className: "item", key: item + " " + index },
 					item,
-					React.createElement("div", { className: "bin" })
+					React.createElement("div", { className: "bin",
+						onClick: _this2.deleteNote.bind(_this2, index)
+					})
 				);
 			});
 			return React.createElement(
@@ -10744,7 +10756,7 @@ var NotesPage = function (_Reflux$Component) {
 	}, {
 		key: "render",
 		value: function render() {
-			var _this2 = this;
+			var _this3 = this;
 
 			console.log("render notes");
 			var output = this.createMarkup();
@@ -10762,7 +10774,7 @@ var NotesPage = function (_Reflux$Component) {
 							className: "newItem",
 							onClick: this.showInput.bind(this),
 							ref: function ref(newbtn) {
-								_this2.newBtn = newbtn;
+								_this3.newBtn = newbtn;
 							} },
 						"NEW ITEM"
 					),
@@ -10770,7 +10782,7 @@ var NotesPage = function (_Reflux$Component) {
 						"div",
 						{ className: "inputBlock hide",
 							ref: function ref(inpblock) {
-								_this2.inpBlock = inpblock;
+								_this3.inpBlock = inpblock;
 							} },
 						React.createElement("input", {
 							type: "text",
@@ -10783,7 +10795,7 @@ var NotesPage = function (_Reflux$Component) {
 								id: "add",
 								onClick: this.addNote.bind(this),
 								ref: function ref(addbtn) {
-									_this2.addBtn = addbtn;
+									_this3.addBtn = addbtn;
 								} },
 							"ADD"
 						)
@@ -10889,7 +10901,7 @@ var WeatherPage = function (_Reflux$Component) {
 						{ className: "cityName" },
 						weather.location.name
 					),
-					React.createElement("div", { className: "mainIcon", style: { background: "url(output/pics/" + weather.current.condition.icon.slice(30), backgroundSize: "contain" } })
+					React.createElement("div", { className: "mainIcon", style: { background: "url(output/pics/" + weather.current.condition.icon.slice(30), backgroundSize: "contain", backgroundRepeat: "no-repeat" } })
 				),
 				React.createElement(
 					"div",
