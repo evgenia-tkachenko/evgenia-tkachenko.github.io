@@ -3,7 +3,7 @@ var millionaire;
 function raiseSalary() {
     var salaryDiv = document.getElementById("mySalaryValue");
     var currentSalary = Number.parseInt(salaryDiv.textContent);
-    var newSalary = currentSalary + Math.floor(Math.random() * 2000) + 50;
+    var newSalary = currentSalary + Math.floor(Math.random() * 20000) + 500;
     salaryDiv.textContent = newSalary;
 
     if (newSalary > 1000000 && !millionaire) {
