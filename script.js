@@ -6,11 +6,11 @@ function raiseSalary() {
     var newSalary = currentSalary + Math.floor(Math.random() * 2000) + 50;
     salaryDiv.textContent = newSalary;
 
-    if (newSalary > 10000 && !millionaire) {
+    if (newSalary > 1000000 && !millionaire) {
         becomeMillionaire();
     }
 
-    if (newSalary > 20000 && millionaire) {
+    if (newSalary > 2000000 && millionaire) {
         loseEverything()
     }
 
